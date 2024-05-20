@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Tercer from '../components/Login.vue'
+import helloword from '../components/HelloWorld.vue'
 
 Vue.use(VueRouter)
 
@@ -10,6 +11,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/Helloword',
+    name: 'home',
+    component: helloword
   },
   {
     path: '/about',
