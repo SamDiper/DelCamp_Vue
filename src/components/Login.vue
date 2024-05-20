@@ -1,6 +1,5 @@
 <template>
     <div>
-        <button @click="mostrarDatos">Fetch Data</button>
         <div v-if="data">
         <pre>{{ data }}</pre>
         </div>
@@ -20,7 +19,7 @@
                 <label for="user-password">Contraseña</label>
                 <input v-model="password" class="user-password" type="password" id="campoContraseña" placeholder="********">
 
-                <button class="btn-register" @click="enviarDatos">Iniciar Sesión</button>
+                <button class="btn-register" @click="infoenviar">Iniciar Sesión</button>
                 <p>¿Aun no tienes una cuenta? <a href="/Components/Login-Register-User/user_register.html">Registrate</a>
                 </p>
                 <p>Olvidaste tu contraseña? <a href="#">Recuperar Contraseña</a></p>
@@ -31,46 +30,35 @@
 </template>
 
 <script>
-import axios from 'axios'
+import API from '@/api'
     export default{
         name:"miTercerComponente",
         data(){
             return{
                 data: null,
                 email: null,
-                password: null
+                password: null,
             }
         },
-        methods:{
-            mostrarDatos() {
-                axios.get('https://render-delcamp.onrender.com/clientes')
-                    .then(response => {
-                        console.log('entro')
-                        this.data = response.data;
-                        console.log(this.data)
-                    })
-                    .catch(error => {
-                        console.error('Error fetching data:', error);
-                    });
-            },
-            enviarDatos() {
-                console.log(`${this.email} y ${this.password}`)
-                axios.post('https://render-delcamp.onrender.com/clientes',{
-                    id: Math.floor(Math.random() * 100) + 1,
-                    Correo: this.email,
-                    Contraseña: this.password
-                })
-                    .then(response => {
-                        this.data = response.data;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching data:', error);
-                    });
-            }
+        methods: {
+        infodelcamp () {
+            let a = API.peticion('https://render-delcamp.onrender.com/clientes')
+            console.log(a);
         },
-        mounted() {
-            this.mensaje = 'Descubre el número mayor';
-        }
+
+        infoenviar () {
+            API.enviar('https://render-delcamp.onrender.com/clientes', 
+                {
+                correo: this.email,
+                contraseña:this.password} 
+            )
+   
+                }
+    },
+
+    mounted () {
+        this.infodelcamp()
+    }
     }
 </script>
 
