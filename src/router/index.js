@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import Tercer from '../components/Tercer.vue'
+import Tercer from '../components/Login.vue'
 
 Vue.use(VueRouter)
 
