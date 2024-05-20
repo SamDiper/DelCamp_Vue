@@ -47,6 +47,7 @@
 
 <script>
 import API from "@/api";
+import { ref } from "vue";
 export default {
   name: "miTercerComponente",
   data() {
@@ -58,9 +59,10 @@ export default {
   },
   methods: {
     infodelcamp() {
+        let globalizatio  = ref([])
       API.peticion("https://render-delcamp.onrender.com/clientes").then(
         (response) => {
-          console.log(response);
+            globalizatio.value(response.data)
         }
       );
     },
